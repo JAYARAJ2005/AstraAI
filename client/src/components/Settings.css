@@ -1,0 +1,408 @@
+/* =========================
+   SETTINGS OVERLAY
+========================= */
+
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+
+  z-index: 9999;
+}
+
+/* =========================
+   SETTINGS PANEL
+========================= */
+
+.settings-panel {
+  width: 390px;
+  max-width: 100%;
+
+  height: 100vh;
+
+  background: #ffffff;
+  color: #222222;
+
+  padding: 25px;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.2);
+
+  animation: settingsSlide 0.25s ease;
+}
+
+.app.dark .settings-panel {
+  background: #202123;
+  color: #ffffff;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes settingsSlide {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.app.dark .settings-header {
+  border-bottom-color: #3a3a3a;
+}
+
+.settings-header h2 {
+  margin: 0;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.settings-close {
+  width: 35px;
+  height: 35px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #f1f1f1;
+  color: #333333;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-close:hover {
+  background: #dddddd;
+}
+
+.app.dark .settings-close {
+  background: #343541;
+  color: #ffffff;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.settings-section {
+  padding: 22px 0;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.app.dark .settings-section {
+  border-bottom-color: #3a3a3a;
+}
+
+.settings-section h3 {
+  margin: 0 0 15px 0;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  color: #777777;
+}
+
+.app.dark .settings-section h3 {
+  color: #aaaaaa;
+}
+
+/* =========================
+   ACCOUNT
+========================= */
+
+.settings-account {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.account-avatar {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #6d28d9,
+    #9333ea
+  );
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.settings-account strong {
+  display: block;
+
+  font-size: 16px;
+
+  margin-bottom: 4px;
+}
+
+.settings-account p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #777777;
+}
+
+.app.dark .settings-account p {
+  color: #aaaaaa;
+}
+
+/* =========================
+   APPEARANCE OPTION
+========================= */
+
+.settings-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.settings-option strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 15px;
+}
+
+.settings-option p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #777777;
+}
+
+.app.dark .settings-option p {
+  color: #aaaaaa;
+}
+
+/* =========================
+   TOGGLE
+========================= */
+
+.toggle {
+  width: 50px;
+  height: 28px;
+
+  padding: 3px;
+
+  border: none;
+  border-radius: 20px;
+
+  background: #cccccc;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.toggle span {
+  display: block;
+
+  width: 22px;
+  height: 22px;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  transition: 0.2s;
+}
+
+.toggle.active {
+  background: #7c3aed;
+}
+
+.toggle.active span {
+  transform: translateX(22px);
+}
+
+/* =========================
+   CLEAR CHAT
+========================= */
+
+.settings-danger {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+
+  background: #fff1f2;
+
+  color: #be123c;
+
+  font-size: 14px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.settings-danger:hover {
+  background: #ffe4e6;
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+.settings-logout {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid #dddddd;
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #333333;
+
+  font-size: 14px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.settings-logout:hover {
+  background: #f2f2f2;
+}
+
+.app.dark .settings-logout {
+  background: #2a2b32;
+  border-color: #444444;
+  color: #ffffff;
+}
+
+.app.dark .settings-logout:hover {
+  background: #343541;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.settings-footer {
+  text-align: center;
+
+  padding-top: 25px;
+
+  color: #777777;
+}
+
+.settings-footer p {
+  margin: 0 0 5px 0;
+
+  color: #6d28d9;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.settings-footer span {
+  font-size: 12px;
+}
+
+/* =========================
+   SIDEBAR SETTINGS BUTTON
+========================= */
+
+.settings-btn {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  margin-bottom: 6px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #444444;
+
+  font-size: 14px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.settings-btn:hover {
+  background: #e8e8e8;
+}
+
+.app.dark .settings-btn {
+  color: #eeeeee;
+}
+
+.app.dark .settings-btn:hover {
+  background: #343541;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .settings-panel {
+    width: 100%;
+  }
+}
