@@ -76,6 +76,10 @@ function App() {
   const [showSettings, setShowSettings] =
     useState(false);
 
+  // Mobile sidebar drawer
+  const [sidebarOpen, setSidebarOpen] =
+    useState(false);
+
   // =====================================================
   // CHAT
   // =====================================================
@@ -417,6 +421,8 @@ function App() {
   // =====================================================
 
   const handleNewChat = async () => {
+    setSidebarOpen(false);
+
     if (
       generationControllerRef.current
     ) {
@@ -469,6 +475,8 @@ function App() {
 
   const handleSelectConversation =
     async (id) => {
+      setSidebarOpen(false);
+
       if (
         generationControllerRef.current
       ) {
@@ -1270,7 +1278,24 @@ function App() {
           SIDEBAR
       ================================================= */}
 
-      <aside className="sidebar">
+      {/* MOBILE MENU BACKDROP */}
+
+      {sidebarOpen && (
+        <div
+          className="sidebar-backdrop"
+          onClick={() =>
+            setSidebarOpen(false)
+          }
+        />
+      )}
+
+      <aside
+        className={
+          sidebarOpen
+            ? "sidebar open"
+            : "sidebar"
+        }
+      >
 
         {/* LOGO */}
 
@@ -1436,12 +1461,14 @@ function App() {
 
           <button
             className="sidebar-profile-btn"
-            onClick={() =>
+            onClick={() => {
+              setSidebarOpen(false);
+
               setShowProfile(
                 (previous) =>
                   !previous
-              )
-            }
+              );
+            }}
           >
 
             <div className="sidebar-profile-avatar">
@@ -1470,9 +1497,11 @@ function App() {
 
           <button
             className="settings-btn"
-            onClick={() =>
-              setShowSettings(true)
-            }
+            onClick={() => {
+              setSidebarOpen(false);
+
+              setShowSettings(true);
+            }}
           >
             ⚙️ Settings
           </button>
@@ -1490,6 +1519,19 @@ function App() {
         {/* TOP BAR */}
 
         <div className="top-bar">
+
+          {/* MOBILE MENU BUTTON */}
+
+          <button
+            className="menu-btn"
+            onClick={() =>
+              setSidebarOpen(true)
+            }
+            title="Open menu"
+            aria-label="Open menu"
+          >
+            ☰
+          </button>
 
           {/* BACK TO WELCOME PAGE */}
 

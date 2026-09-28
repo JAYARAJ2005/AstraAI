@@ -3156,3 +3156,185 @@ textarea {
   }
 
 }
+/* =========================================================
+   ASTRAAI MOBILE RESPONSIVE POLISH
+   (ADD THIS BLOCK AT THE VERY BOTTOM OF App.css)
+========================================================= */
+
+/* ---------- Hidden on desktop ---------- */
+
+.menu-btn {
+  display: none;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+/* Menu button look (matches the dark mode button) */
+
+.menu-btn {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 8px;
+  padding: 0;
+
+  border: 1px solid #dddddd;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #333333;
+
+  font-size: 18px;
+  line-height: 1;
+}
+
+.menu-btn:hover {
+  background: #f2f2f2;
+}
+
+.app.dark .menu-btn {
+  background: #2a2a2a;
+  border-color: #444444;
+  color: #eeeeee;
+}
+
+.app.dark .menu-btn:hover {
+  background: #333333;
+}
+
+@keyframes astraaiBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   TABLET + PHONE  (slide-in sidebar)
+========================================================= */
+
+@media (max-width: 700px) {
+  /* Use the real visible height on mobile browsers */
+
+  .app,
+  .main {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  /* Show the menu button */
+
+  .menu-btn {
+    display: flex;
+  }
+
+  /* Sidebar becomes a slide-in drawer */
+
+  .sidebar {
+    display: flex;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    z-index: 200;
+
+    width: 290px;
+    min-width: 0;
+    max-width: 86vw;
+
+    height: 100vh;
+    height: 100dvh;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.25s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Dark backdrop behind the open drawer */
+
+  .sidebar-backdrop {
+    display: block;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 150;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    animation: astraaiBackdropIn 0.2s ease;
+  }
+
+  /* Keep the input clear of the phone's bottom bar */
+
+  .input-area {
+    padding-bottom: calc(9px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* 16px inputs stop iPhones from zooming in on focus */
+
+  .input-wrapper textarea,
+  .edit-message-box textarea,
+  .chat-search input,
+  .form-group input {
+    font-size: 16px;
+  }
+
+  /* Edit box fits small screens */
+
+  .edit-message-box {
+    min-width: min(320px, 72vw);
+  }
+
+  /* Wide content scrolls instead of breaking the layout */
+
+  .assistant-message-content pre {
+    max-width: 100%;
+  }
+
+  .assistant-message-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Back button smaller so the top bar fits */
+
+  .top-bar {
+    gap: 0;
+  }
+}
+
+/* =========================================================
+   TOUCH DEVICES (no hover)
+   Show the action buttons that normally appear on hover
+========================================================= */
+
+@media (hover: none) {
+  .message-action-btn,
+  .conversation-action {
+    opacity: 1;
+  }
+
+  .conversation-action {
+    width: 34px;
+    height: 34px;
+  }
+}
