@@ -6,6 +6,7 @@ import {
 
 import ReactMarkdown from "react-markdown";
 
+import WelcomePage from "./components/WelcomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Settings from "./components/Settings";
@@ -34,6 +35,12 @@ function App() {
 
   const [showRegister, setShowRegister] =
     useState(false);
+
+  // Welcome page is shown first when logged out
+  const [showWelcome, setShowWelcome] =
+    useState(
+      !localStorage.getItem("token")
+    );
 
   // =====================================================
   // USER PROFILE
@@ -310,6 +317,8 @@ function App() {
   const handleLogin = (user) => {
     setIsLoggedIn(true);
 
+    setShowWelcome(false);
+
     if (user) {
       setCurrentUser(user);
 
@@ -361,6 +370,11 @@ function App() {
     setShowSettings(false);
 
     setShowProfile(false);
+
+    // Return to welcome page after logout
+    setShowRegister(false);
+
+    setShowWelcome(true);
   };
 
   // =====================================================
@@ -1155,6 +1169,25 @@ function App() {
   };
 
   // =====================================================
+  // WELCOME PAGE
+  // =====================================================
+
+  if (showWelcome) {
+    return (
+      <WelcomePage
+        onLogin={() => {
+          setShowWelcome(false);
+          setShowRegister(false);
+        }}
+        onRegister={() => {
+          setShowWelcome(false);
+          setShowRegister(!isLoggedIn);
+        }}
+      />
+    );
+  }
+
+  // =====================================================
   // AUTH SCREEN
   // =====================================================
 
@@ -1165,6 +1198,9 @@ function App() {
           onRegister={() =>
             setShowRegister(false)
           }
+          onBack={() =>
+            setShowWelcome(true)
+          }
         />
       );
     }
@@ -1174,6 +1210,9 @@ function App() {
         onLogin={handleLogin}
         onRegister={() =>
           setShowRegister(true)
+        }
+        onBack={() =>
+          setShowWelcome(true)
         }
       />
     );
@@ -1416,6 +1455,19 @@ function App() {
         {/* TOP BAR */}
 
         <div className="top-bar">
+
+          {/* BACK TO WELCOME PAGE */}
+
+          <button
+            className="dashboard-back-btn"
+            onClick={() => {
+              setShowProfile(false);
+              setShowWelcome(true);
+            }}
+            title="Back to welcome page"
+          >
+            ← Back
+          </button>
 
           <button
             className="dark-mode-btn"
