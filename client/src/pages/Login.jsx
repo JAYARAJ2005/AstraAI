@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { loginUser } from "../services/api";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 function Login({
   onLogin,
   onRegister,
@@ -12,22 +14,78 @@ function Login({
   const [password, setPassword] =
     useState("");
 
+  const [showPassword, setShowPassword] =
+    useState(false);
+
+  const [touched, setTouched] =
+    useState({
+      email: false,
+      password: false,
+    });
+
+  const [submitted, setSubmitted] =
+    useState(false);
+
   const [loading, setLoading] =
     useState(false);
 
   const [error, setError] =
     useState("");
 
+  // =====================================================
+  // VALIDATION
+  // =====================================================
+
+  const validate = () => {
+    const errors = {};
+
+    if (!email.trim()) {
+      errors.email =
+        "Email is required";
+    } else if (
+      !EMAIL_REGEX.test(email.trim())
+    ) {
+      errors.email =
+        "Enter a valid email address";
+    }
+
+    if (!password) {
+      errors.password =
+        "Password is required";
+    }
+
+    return errors;
+  };
+
+  const errors = validate();
+
+  const fieldError = (field) =>
+    (touched[field] || submitted) &&
+    errors[field]
+      ? errors[field]
+      : "";
+
+  const handleBlur = (field) => {
+    setTouched((previous) => ({
+      ...previous,
+      [field]: true,
+    }));
+  };
+
+  // =====================================================
+  // LOGIN
+  // =====================================================
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     setError("");
 
-    if (!email || !password) {
-      setError(
-        "Please enter email and password"
-      );
+    setSubmitted(true);
 
+    if (
+      Object.keys(errors).length > 0
+    ) {
       return;
     }
 
@@ -35,7 +93,7 @@ function Login({
       setLoading(true);
 
       const data = await loginUser({
-        email,
+        email: email.trim(),
         password,
       });
 
@@ -53,10 +111,21 @@ function Login({
         error
       );
 
-      setError(
-        error.response?.data?.message ||
+      if (error.response) {
+        setError(
+          error.response.data
+            ?.message ||
+            "Login failed. Please try again."
+        );
+      } else if (error.request) {
+        setError(
+          "Cannot reach the server. Please make sure the backend is running."
+        );
+      } else {
+        setError(
           "Login failed. Please try again."
-      );
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -105,26 +174,47 @@ function Login({
 
         <form
           onSubmit={handleLogin}
+          noValidate
         >
 
           {/* EMAIL */}
 
           <div className="form-group">
 
-            <label>
+            <label htmlFor="login-email">
               Email
             </label>
 
             <input
+              id="login-email"
               type="email"
               placeholder="Enter your email"
+              autoComplete="email"
               value={email}
+              className={
+                fieldError("email")
+                  ? "input-error"
+                  : ""
+              }
+              aria-invalid={
+                !!fieldError("email")
+              }
+              disabled={loading}
               onChange={(e) =>
                 setEmail(
                   e.target.value
                 )
               }
+              onBlur={() =>
+                handleBlur("email")
+              }
             />
+
+            {fieldError("email") && (
+              <div className="field-error">
+                {fieldError("email")}
+              </div>
+            )}
 
           </div>
 
@@ -132,20 +222,68 @@ function Login({
 
           <div className="form-group">
 
-            <label>
+            <label htmlFor="login-password">
               Password
             </label>
 
-            <input
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) =>
-                setPassword(
-                  e.target.value
-                )
-              }
-            />
+            <div className="password-field">
+
+              <input
+                id="login-password"
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                value={password}
+                className={
+                  fieldError("password")
+                    ? "input-error"
+                    : ""
+                }
+                aria-invalid={
+                  !!fieldError(
+                    "password"
+                  )
+                }
+                disabled={loading}
+                onChange={(e) =>
+                  setPassword(
+                    e.target.value
+                  )
+                }
+                onBlur={() =>
+                  handleBlur(
+                    "password"
+                  )
+                }
+              />
+
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() =>
+                  setShowPassword(
+                    (previous) =>
+                      !previous
+                  )
+                }
+                tabIndex={-1}
+              >
+                {showPassword
+                  ? "Hide"
+                  : "Show"}
+              </button>
+
+            </div>
+
+            {fieldError("password") && (
+              <div className="field-error">
+                {fieldError("password")}
+              </div>
+            )}
 
           </div>
 

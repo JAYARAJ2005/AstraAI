@@ -3338,3 +3338,122 @@ textarea {
     height: 34px;
   }
 }
+/* =========================================================
+   ASTRAAI LOGIN / REGISTER VALIDATION
+   (ADD THIS BLOCK AT THE VERY BOTTOM OF App.css)
+========================================================= */
+
+/* ---------- Invalid input ---------- */
+
+.form-group input.input-error {
+  border-color: #ef4444;
+}
+
+.form-group input.input-error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.field-error {
+  margin-top: 6px;
+
+  color: #fca5a5;
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  text-align: left;
+}
+
+/* ---------- Show / Hide password ---------- */
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 64px;
+}
+
+.password-toggle {
+  position: absolute;
+
+  top: 50%;
+  right: 8px;
+
+  transform: translateY(-50%);
+
+  padding: 6px 9px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+  color: #a78bfa;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.password-toggle:hover {
+  background: rgba(124, 58, 237, 0.14);
+  color: #c4b5fd;
+}
+
+/* ---------- Password strength meter ---------- */
+
+.password-strength {
+  margin-top: 9px;
+}
+
+.strength-bar {
+  display: flex;
+  gap: 4px;
+}
+
+.strength-bar span {
+  flex: 1;
+
+  height: 4px;
+
+  border-radius: 4px;
+
+  background: #393443;
+
+  transition: background 0.2s ease;
+}
+
+.strength-bar.weak span:nth-child(1) {
+  background: #ef4444;
+}
+
+.strength-bar.medium span:nth-child(-n + 2) {
+  background: #f59e0b;
+}
+
+.strength-bar.strong span {
+  background: #22c55e;
+}
+
+.strength-label {
+  margin-top: 6px;
+
+  color: #9995a8;
+
+  font-size: 11px;
+
+  text-align: left;
+}
+
+/* ---------- Disabled inputs while submitting ---------- */
+
+.form-group input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
