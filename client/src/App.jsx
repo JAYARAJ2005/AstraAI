@@ -148,6 +148,10 @@ function App() {
   const generationControllerRef =
     useRef(null);
 
+  // Chat input textarea (auto-grow)
+  const inputRef =
+    useRef(null);
+
   // =====================================================
   // LOAD USER
   // =====================================================
@@ -309,6 +313,37 @@ function App() {
       darkMode
     );
   }, [darkMode]);
+
+  // =====================================================
+  // AUTO-GROW INPUT BOX
+  // =====================================================
+
+  useEffect(() => {
+    const textarea =
+      inputRef.current;
+
+    if (!textarea) {
+      return;
+    }
+
+    // Reset first so the box can also shrink
+    textarea.style.height = "auto";
+
+    // Grow with the text, up to 140px (same as CSS max-height)
+    const newHeight = Math.min(
+      textarea.scrollHeight,
+      140
+    );
+
+    textarea.style.height =
+      `${newHeight}px`;
+
+    // Scroll inside the box once it reaches the maximum
+    textarea.style.overflowY =
+      textarea.scrollHeight > 140
+        ? "auto"
+        : "hidden";
+  }, [message, isLoggedIn, showWelcome]);
 
   // =====================================================
   // LOGIN
@@ -1924,6 +1959,7 @@ function App() {
           <div className="input-wrapper">
 
             <textarea
+              ref={inputRef}
               value={message}
               onChange={(event) =>
                 setMessage(
