@@ -3,6 +3,7 @@ import {
   useRef,
   useState,
 } from "react";
+import AstraLogo from "../components/AstraLogo";
 
 import { registerUser } from "../services/api";
 
@@ -250,9 +251,7 @@ function Register({ onRegister, onBack }) {
 
         {/* Logo */}
 
-        <div className="login-logo">
-          ✦
-        </div>
+        <div className="login-logo"><AstraLogo /></div>
 
         {/* Title */}
 

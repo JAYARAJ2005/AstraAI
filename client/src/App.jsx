@@ -5,6 +5,7 @@ import {
 } from "react";
 
 import ReactMarkdown from "react-markdown";
+import AstraLogo from "./components/AstraLogo";
 
 import WelcomePage from "./components/WelcomePage";
 import Login from "./pages/Login";
@@ -1301,9 +1302,7 @@ function App() {
 
         <div className="sidebar-logo">
 
-          <div className="logo-icon">
-            ✦
-          </div>
+          <div className="logo-icon"><AstraLogo /></div>
 
           <span>
             AstraAI
@@ -1662,9 +1661,7 @@ function App() {
 
               <div className="welcome">
 
-                <div className="welcome-icon">
-                  ✦
-                </div>
+                <div className="welcome-icon"><AstraLogo /></div>
 
                 <h1>
                   Welcome to AstraAI
@@ -1884,9 +1881,7 @@ function App() {
 
                       <div className="assistant-message-wrapper">
 
-                        <div className="assistant-avatar">
-                          ✦
-                        </div>
+                        <div className="assistant-avatar"><AstraLogo /></div>
 
                         <div className="assistant-content-wrapper">
 
@@ -1958,9 +1953,7 @@ function App() {
 
                 <div className="assistant-message-wrapper">
 
-                  <div className="assistant-avatar">
-                    ✦
-                  </div>
+                  <div className="assistant-avatar"><AstraLogo /></div>
 
                   <div className="assistant-content-wrapper">
 

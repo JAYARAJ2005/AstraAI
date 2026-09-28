@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loginUser } from "../services/api";
+import AstraLogo from "../components/AstraLogo";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -148,9 +149,7 @@ function Login({
 
         {/* LOGO */}
 
-        <div className="login-logo">
-          ✦
-        </div>
+        <div className="login-logo"><AstraLogo /></div>
 
         {/* TITLE */}
 

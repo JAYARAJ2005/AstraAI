@@ -3457,3 +3457,48 @@ textarea {
   opacity: 0.65;
   cursor: not-allowed;
 }
+/* =========================================================
+   ASTRAAI STAR LOGO
+   (ADD THIS BLOCK AT THE VERY BOTTOM OF App.css)
+========================================================= */
+
+/* The SVG fills the box it sits in */
+
+.astra-logo {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* Remove the old purple square behind the icon */
+
+.login-logo,
+.logo-icon,
+.welcome-icon,
+.assistant-avatar {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Large logos: same glow as the Welcome page */
+
+.login-logo,
+.welcome-icon {
+  filter:
+    drop-shadow(0 0 10px rgba(167, 139, 250, 0.45))
+    drop-shadow(0 0 26px rgba(124, 58, 237, 0.25));
+}
+
+/* Small logos: soft glow */
+
+.logo-icon,
+.assistant-avatar {
+  filter: drop-shadow(0 0 6px rgba(124, 58, 237, 0.35));
+}
+
+/* Slightly smaller star inside the small boxes */
+
+.assistant-avatar {
+  padding: 3px;
+}
