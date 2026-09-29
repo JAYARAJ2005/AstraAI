@@ -3502,3 +3502,43 @@ textarea {
 .assistant-avatar {
   padding: 3px;
 }
+/* =========================================================
+   ASTRAAI MOBILE — KEEP TOP BAR ALWAYS VISIBLE
+   (ADD THIS BLOCK AT THE VERY BOTTOM OF App.css,
+   AFTER the other mobile-responsive block)
+========================================================= */
+
+@media (max-width: 700px) {
+  /* Pin the top bar (☰ menu, ← Back, ☀/🌙) so it can
+     never scroll off screen, even if the page scrolls
+     as a whole on some mobile browsers */
+
+  .top-bar {
+    position: sticky;
+    top: 0;
+
+    z-index: 60;
+
+    padding-top: calc(10px + env(safe-area-inset-top, 0px));
+
+    background: #ffffff;
+  }
+
+  .app.dark .top-bar {
+    background: #212121;
+  }
+
+  /* Stop the page itself from scrolling; only .chat-area
+     should scroll. This is the safety net in case the
+     dynamic viewport height (keyboard / address bar)
+     causes the whole page to scroll instead. */
+
+  html,
+  body {
+    position: fixed;
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+  }
+}
