@@ -1,7 +1,23 @@
 import axios from "axios";
 
+// =====================================================
+// API BASE URL
+// =====================================================
+//
+// Local development: no setup needed, defaults to your
+// local backend on port 5000.
+//
+// Deployment: create client/.env.production with:
+//   VITE_API_URL=https://your-backend-address.com/api
+// and rebuild the frontend (npm run build).
+// =====================================================
+
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:5000/api";
+
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: API_BASE_URL,
 });
 
 API.interceptors.request.use((config) => {
