@@ -147,7 +147,9 @@ function App() {
   // REFS
   // =====================================================
 
-  const messagesEndRef =
+  // The scrollable chat list (scrolled directly,
+  // so the page / top bar never moves)
+  const chatAreaRef =
     useRef(null);
 
   const generationControllerRef =
@@ -299,11 +301,29 @@ function App() {
   }, [isLoggedIn]);
 
   // =====================================================
-  // AUTO SCROLL
+  // AUTO SCROLL (chat list only - never the page)
   // =====================================================
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({
+    const chatArea =
+      chatAreaRef.current;
+
+    if (!chatArea) {
+      return;
+    }
+
+    // Welcome screen: stay at the top
+    if (
+      !messages.length &&
+      !loading
+    ) {
+      chatArea.scrollTop = 0;
+
+      return;
+    }
+
+    chatArea.scrollTo({
+      top: chatArea.scrollHeight,
       behavior: "smooth",
     });
   }, [messages, loading]);
@@ -1651,7 +1671,10 @@ function App() {
             CHAT AREA
         ================================================= */}
 
-        <div className="chat-area">
+        <div
+          className="chat-area"
+          ref={chatAreaRef}
+        >
 
           {/* WELCOME */}
 
@@ -1976,10 +1999,6 @@ function App() {
               </div>
 
             )}
-
-            <div
-              ref={messagesEndRef}
-            />
 
           </div>
 
