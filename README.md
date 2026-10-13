@@ -1,79 +1,48 @@
-# AstraAI — AI Chat Assistant
+# ✦ AstraAI
 
-A ChatGPT-style AI chat assistant with user accounts, persistent chat history, and message editing and regeneration — built with the MERN stack and powered by either a local Ollama model or the hosted Groq API.
+A ChatGPT-style AI chat assistant with user accounts, persistent chat history, and message editing and regeneration. Built with the MERN stack and powered by either a local Ollama model or the hosted Groq API.
 
-**Live demo:** https://astra-ai-chatassistant.vercel.app
+## 🔗 Live Demo
 
-## Features
+* https://astra-ai-chatassistant.vercel.app
 
-- **Authentication** — JWT-based auth with hashed passwords and client-side validation (email format, password strength, matching confirmation)
-- **Chat Interface** — send messages and view Markdown-formatted AI responses, including headings, lists, code blocks, tables, and blockquotes
-- **Pluggable AI Backend** — switch between a local Ollama model and the hosted Groq API with a single environment variable, no code changes needed
-- **Message Controls** — edit a sent message and regenerate the conversation from that point, regenerate the latest response, copy any response, or stop generation mid-reply
-- **Chat History** — create, rename, delete, and search past conversations, with auto-generated chat titles
-- **Settings** — toggle dark/light mode, clear the current chat, export a chat as a `.txt` file, or log out
-- **Profile Popup** — view your account name and email at a glance
-- **Dark / Light Mode** — theme preference persists across sessions
-- **Responsive Design** — full mobile support with a slide-in sidebar drawer, touch-friendly controls, and a safe-area aware layout
-- **Auto-growing Input** — the textarea expands with long messages, then scrolls internally
-- **Custom Branding** — welcome landing page and a consistent star logo across the app
+## ✨ Features
 
-## Tech Stack
+* Register and log in with JWT authentication and client-side validation (email format, password strength, matching confirmation)
+* Chat interface with Markdown-formatted AI replies: headings, lists, code blocks, tables and blockquotes
+* Switch between a local Ollama model and the hosted Groq API with a single environment variable, with no code changes
+* Edit a sent message and regenerate the conversation from that point
+* Regenerate the latest AI response, copy any response, or stop generation mid-reply
+* Chat history: create, rename, delete and search past conversations, with auto-generated chat titles
+* Settings to toggle dark/light mode, clear the current chat, export a chat as a `.txt` file, or log out
+* Profile popup showing your account name and email
+* Dark and light themes that persist across sessions
+* Responsive design with a slide-in sidebar drawer, touch-friendly controls and a safe-area aware layout on mobile
+* Auto-growing message box that expands with long text, then scrolls internally
+* Custom branding with a welcome landing page and a consistent star logo
 
-**Frontend**
+## 🛠️ Technologies Used
 
-- React (Vite)
-- react-markdown
+* React (Vite)
+* react-markdown
+* Node.js and Express
+* MongoDB with Mongoose
+* JWT authentication and bcrypt password hashing
+* Groq API (hosted) or Ollama (local) for AI responses
+* HTML5 and CSS3 (flexbox, grid, animations, responsive layouts)
+* GitHub for version control
+* Vercel (frontend), Render (backend) and MongoDB Atlas (database) for deployment
 
-**Backend**
+## 🚀 How to Run Locally
 
-- Node.js + Express
-- MongoDB + Mongoose
-- JWT authentication + bcrypt password hashing
-- Groq API (hosted) or Ollama (local) for all AI generation
-
-**Deployment**
-
-- Frontend: Vercel
-- Backend: Render
-- Database: MongoDB Atlas
-
-## Project Structure
+1. Clone this repository and open the project folder.
 
 ```
-AstraAI/
-├── client/                 # React (Vite) frontend
-│   ├── src/
-│   │   ├── pages/          # Route-level pages (Login, Register, Chat, etc.)
-│   │   ├── components/     # Reusable UI components (Sidebar, MessageBubble, etc.)
-│   │   ├── context/        # React context (auth, theme)
-│   │   └── services/       # API client
-│   └── ...
-└── server/                 # Express backend
-    ├── controllers/        # Route handler logic
-    ├── models/             # Mongoose schemas (User, Chat)
-    ├── routes/             # Express route definitions
-    ├── services/           # Groq / Ollama integration
-    ├── middleware/         # Auth middleware
-    └── index.js            # App entry point
+git clone https://github.com/JAYARAJ2005/AstraAI.git
+cd AstraAI
 ```
 
-## Running Locally
-
-### Prerequisites
-
-- Node.js (v18+)
-- A MongoDB Atlas connection string (or local MongoDB instance)
-- A Groq API key (or Ollama installed locally with a model pulled)
-
-### 1. Clone the repo
-
-```
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
-```
-
-### 2. Backend setup
+2. Set up the backend.
 
 ```
 cd server
@@ -91,13 +60,13 @@ GROQ_API_KEY=your_groq_api_key
 GROQ_MODEL=openai/gpt-oss-20b
 ```
 
-Run the server:
+Start the server:
 
 ```
 node index.js
 ```
 
-### 3. Frontend setup
+3. Set up the frontend.
 
 ```
 cd ../client
@@ -110,20 +79,38 @@ Create a `client/.env` file:
 VITE_API_URL=http://localhost:5000
 ```
 
-Run the frontend:
+Start the app:
 
 ```
 npm run dev
 ```
 
-The app will be available at http://localhost:5173.
+4. Open http://localhost:5173 and start chatting.
 
-## Notes
+## 📖 How It Works
 
-- Ollama runs on your own machine, so the deployed demo uses the hosted Groq API. Ollama is intended for local development and offline use.
-- Set `AI_PROVIDER` to `groq` or `ollama` to switch backends. Only the variables for the selected provider are required.
-- Never commit your `.env` files — keep them listed in `.gitignore`.
+1. The user registers or logs in, and the server returns a JWT.
+2. The user sends a message, and the backend saves it to MongoDB.
+3. The backend sends the conversation to the selected AI provider (Groq or Ollama).
+4. The AI reply is saved, returned and displayed as formatted Markdown.
+5. The sidebar lists past conversations, which can be searched, renamed or deleted.
 
-## License
+## ⚠️ Limitations
+
+* Ollama runs on your own machine, so the deployed demo uses the hosted Groq API
+* The backend is on a free hosting tier, so the first request after a period of inactivity can take a while
+* AI responses can be inaccurate, so important information should be double-checked
+* Never commit your `.env` files. Keep them listed in `.gitignore`
+
+## 🔮 Future Scope
+
+* Streaming responses as they are generated
+* File and image uploads in chat
+* Voice input and text-to-speech
+* Sharing a conversation with a public link
+* Multiple model choices inside the app
+* Mobile app version
+
+## 📄 License
 
 This project is for educational and portfolio purposes.
