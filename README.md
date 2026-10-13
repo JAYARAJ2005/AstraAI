@@ -2,7 +2,7 @@
 
 A ChatGPT-style AI chat assistant with user accounts, persistent chat history, and message editing and regeneration — built with the MERN stack and powered by either a local Ollama model or the hosted Groq API.
 
-**Live demo:** https://astra-ai-hazel.vercel.app
+**Live demo:** https://astra-ai-chatassistant.vercel.app
 
 ## Features
 
