@@ -14,21 +14,34 @@ const app = express();
 // CORS
 // =========================
 //
-// FRONTEND_URL in .env can be one address or a comma-separated
-// list, e.g.:
-//   FRONTEND_URL=https://astraai.vercel.app,https://astraai.netlify.app
+// Allowed frontends:
+//   1. Local development (Vite on 5173)
+//   2. The deployed Vercel sites listed below
+//   3. Anything in FRONTEND_URL (.env / Render), which can be one
+//      address or a comma-separated list, e.g.:
+//        FRONTEND_URL=https://a.vercel.app,https://b.vercel.app
 //
-// Local development (Vite on 5173) is always allowed, so your
-// setup keeps working without changing .env.
+// Trailing slashes are removed, so "https://x.vercel.app/" and
+// "https://x.vercel.app" both work.
 // =========================
 
+const cleanUrl = (url) => url.trim().replace(/\/+$/, "");
+
 const allowedOrigins = [
+  // Local development
   "http://localhost:5173",
   "http://127.0.0.1:5173",
+
+  // Deployed frontend (current + previous address)
+  "https://astra-ai-chatassistant.vercel.app",
+  "https://astra-ai-hazel.vercel.app",
+
+  // Extra addresses from the environment
   ...(process.env.FRONTEND_URL
     ? process.env.FRONTEND_URL
         .split(",")
-        .map((url) => url.trim())
+        .map(cleanUrl)
+        .filter(Boolean)
     : []),
 ];
 
