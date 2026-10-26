@@ -5,6 +5,7 @@ import {
 } from "react";
 
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
@@ -30,12 +31,14 @@ import {
 import "./App.css";
 
 // =====================================================
-// MATH: convert \( ... \) and \[ ... \] (LaTeX style the AI
+// MATH + TABLES: convert \( ... \) and \[ ... \] (LaTeX style the AI
 // uses) into $ ... $ and $$ ... $$ so remark-math can render them
 // =====================================================
 
 const normalizeMath = (text = "") =>
   text
+    // <br> tags inside table cells: show as a space
+    .replace(/<br\s*\/?>/gi, " ")
     .replace(
       /\\\[([\s\S]*?)\\\]/g,
       (_, math) => `\n$$\n${math}\n$$\n`
@@ -1934,7 +1937,7 @@ function App() {
                           <div className="assistant-message-content">
 
                             <ReactMarkdown
-                              remarkPlugins={[remarkMath]}
+                              remarkPlugins={[remarkGfm, remarkMath]}
                               rehypePlugins={[rehypeKatex]}
                             >
                               {normalizeMath(msg.content)}
