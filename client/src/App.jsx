@@ -5,6 +5,9 @@ import {
 } from "react";
 
 import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import AstraLogo from "./components/AstraLogo";
 
 import WelcomePage from "./components/WelcomePage";
@@ -25,6 +28,22 @@ import {
 } from "./services/api";
 
 import "./App.css";
+
+// =====================================================
+// MATH: convert \( ... \) and \[ ... \] (LaTeX style the AI
+// uses) into $ ... $ and $$ ... $$ so remark-math can render them
+// =====================================================
+
+const normalizeMath = (text = "") =>
+  text
+    .replace(
+      /\\\[([\s\S]*?)\\\]/g,
+      (_, math) => `\n$$\n${math}\n$$\n`
+    )
+    .replace(
+      /\\\(([\s\S]*?)\\\)/g,
+      (_, math) => `$${math}$`
+    );
 
 function App() {
   // =====================================================
@@ -1914,8 +1933,11 @@ function App() {
 
                           <div className="assistant-message-content">
 
-                            <ReactMarkdown>
-                              {msg.content}
+                            <ReactMarkdown
+                              remarkPlugins={[remarkMath]}
+                              rehypePlugins={[rehypeKatex]}
+                            >
+                              {normalizeMath(msg.content)}
                             </ReactMarkdown>
 
                           </div>

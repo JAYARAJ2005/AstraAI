@@ -3466,3 +3466,17 @@ textarea {
 .assistant-avatar {
   padding: 3px;
 }
+
+/* =========================================================
+   MATH (KaTeX)
+========================================================= */
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+.assistant-message-content .katex {
+  font-size: 1.05em;
+}
