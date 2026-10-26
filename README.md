@@ -10,6 +10,8 @@ A ChatGPT-style AI chat assistant with user accounts, persistent chat history, a
 
 * Register and log in with JWT authentication and client-side validation (email format, password strength, matching confirmation)
 * Chat interface with Markdown-formatted AI replies: headings, lists, code blocks, tables and blockquotes
+* Math rendering for formulas and equations in AI replies, powered by KaTeX (LaTeX syntax)
+* GitHub-style Markdown tables, rendered as real tables that scroll sideways on small screens
 * Switch between a local Ollama model and the hosted Groq API with a single environment variable, with no code changes
 * Edit a sent message and regenerate the conversation from that point
 * Regenerate the latest AI response, copy any response, or stop generation mid-reply
@@ -24,7 +26,8 @@ A ChatGPT-style AI chat assistant with user accounts, persistent chat history, a
 ## 🛠️ Technologies Used
 
 * React (Vite)
-* react-markdown
+* react-markdown with remark-gfm (tables), remark-math and rehype-katex (math formulas)
+* KaTeX for fast, high-quality math typesetting
 * Node.js and Express
 * MongoDB with Mongoose
 * JWT authentication and bcrypt password hashing
@@ -58,12 +61,13 @@ JWT_SECRET=your_random_secret
 AI_PROVIDER=groq
 GROQ_API_KEY=your_groq_api_key
 GROQ_MODEL=openai/gpt-oss-20b
+FRONTEND_URL=http://localhost:5173
 ```
 
 Start the server:
 
 ```
-node index.js
+node server.js
 ```
 
 3. Set up the frontend.
@@ -92,7 +96,7 @@ npm run dev
 1. The user registers or logs in, and the server returns a JWT.
 2. The user sends a message, and the backend saves it to MongoDB.
 3. The backend sends the conversation to the selected AI provider (Groq or Ollama).
-4. The AI reply is saved, returned and displayed as formatted Markdown.
+4. The AI reply is saved, returned and displayed as formatted Markdown, with tables and math formulas rendered.
 5. The sidebar lists past conversations, which can be searched, renamed or deleted.
 
 ## ⚠️ Limitations
